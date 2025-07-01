@@ -13,7 +13,12 @@ const Navbar = () => {
     console.log(user);
     const NavItems = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to={'/'}>About Us</NavLink></li>
+        {
+            user && <>
+                <li><NavLink to={'/sendparcel'}>Add Parcel</NavLink></li>
+                <li><NavLink to={'/dashboard'}>DashBoard</NavLink></li>
+            </>
+        }
 
     </>
 
