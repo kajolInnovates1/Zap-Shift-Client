@@ -1,14 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import UseAuth from '../../../Hooks/UserAuth/UseAuth';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 
 const Login = () => {
     const { SignIn, googleLogin } = UseAuth();
     const navigate = useNavigate();
-
-
-
+    const location = useLocation();
+    const form = location.state?.from.pathname || '/';
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
@@ -16,7 +15,7 @@ const Login = () => {
         SignIn(data.email, data.password).then(res => {
             if (res) {
                 alert('Login SuccesFull');
-                navigate('/');
+                navigate(form);
             }
         }).catch(error => {
             alert(error);
@@ -27,7 +26,7 @@ const Login = () => {
         googleLogin().then(res => {
             if (res) {
                 alert('Login Succesfull');
-                navigate('/');
+                navigate(form);
             }
         }).catch(error => {
             alert(error);

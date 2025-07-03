@@ -11,6 +11,9 @@ import Register from "../Pages/Authentication/Register/Register";
 import SendParcel from "../Pages/SendParcel/SendParcel";
 import DashBoard from "../MainLayouts/DashBoardLayout/DashBoard";
 import MyParcels from "../Pages/MyParcels/MyParcels";
+import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
+import Payment from "../MainLayouts/DashBoardLayout/Payment/Payment";
+import MyTransaction from "../MainLayouts/DashBoardLayout/MyTransaction/MyTransaction";
 
 
 export const router = createBrowserRouter([
@@ -24,7 +27,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/sendparcel',
-                Component: SendParcel,
+                element: <PrivateRoutes><SendParcel></SendParcel></PrivateRoutes>,
                 loader: () => fetch('../../data/warehouses.json')
             }
 
@@ -47,11 +50,19 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        Component: DashBoard,
+        element: <PrivateRoutes><DashBoard></DashBoard></PrivateRoutes>,
         children: [
             {
-                index: true,
-                Component: MyParcels
+                path: 'myparcels',
+                element: <PrivateRoutes><MyParcels></MyParcels></PrivateRoutes>
+            },
+            {
+                path: 'payment/:parcelId',
+                Component: Payment
+            },
+            {
+                path: 'transaction',
+                Component: MyTransaction
             }
         ]
 

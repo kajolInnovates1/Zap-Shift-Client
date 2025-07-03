@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { NavLink, Outlet } from "react-router";
+import { MdHome, MdLocalShipping, MdHistory, MdTrackChanges, MdEdit } from 'react-icons/md';
+
 
 const DashBoard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -39,23 +41,29 @@ const DashBoard = () => {
           lg:translate-x-0 h-screen lg:min-h-screen`}
             >
                 <div className="text-2xl font-bold text-indigo-600 mb-6">Dashboard</div>
-                <nav className="space-y-3">
-                    <a
-                        href="#"
-                        className="block text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 px-4 py-2 rounded transition"
-                    >
-                        🏠 Home
-                    </a>
+                <nav className="space-y-3 flex flex-col">
+                    <NavLink to={'/'} className="flex items-center gap-2">
+                        <MdHome /> Home
+                    </NavLink>
 
-                    {/* to={'/dashboard/myparcels'} */}
+                    <NavLink to={'/dashboard/myparcels'} className="flex items-center gap-2">
+                        <MdLocalShipping /> My Parcels
+                    </NavLink>
 
-                    <NavLink >My Parcels</NavLink>
-                    <a
-                        href="#"
-                        className="block text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 px-4 py-2 rounded transition"
-                    >
-                        ⚙️ Settings
-                    </a>
+                    <NavLink to={'/dashboard/transaction'} className="flex items-center gap-2">
+                        <MdHistory /> Transaction History
+                    </NavLink>
+
+                    <NavLink to={'/'} className="flex items-center gap-2">
+                        <MdTrackChanges /> Tracking Package
+                    </NavLink>
+
+                    <NavLink to={'/'} className="flex items-center gap-2">
+                        <MdEdit /> Update Profile
+                    </NavLink>
+
+
+
                 </nav>
             </aside>
 
@@ -68,8 +76,8 @@ const DashBoard = () => {
             )}
 
             {/* Main Content */}
-            <main>
-                <h1>AMi ar Tmi</h1>
+            <main className="w-full">
+                <h1></h1>
                 <Outlet></Outlet>
             </main>
         </div>
